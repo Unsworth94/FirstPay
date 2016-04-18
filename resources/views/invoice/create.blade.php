@@ -21,6 +21,13 @@
 				}
 			});
 		});
+		
+		
+		function addItemRow() {
+			var item_number = ( document.getElementById("item_table").rows.length - 1 );
+			document.getElementById("item_table").insertRow(document.getElementById("item_table").rows.length - 1).innerHTML = '<tr> <td>'+item_number+'</td> <td><input type="text" name="items['+item_number+'][title]" class="form-control" placeholder="items Title" required /></td> <td><input type="text" name="items['+item_number+'][description]" class="form-control" placeholder="items Descripion" required /></td> <td><input type="number" name="items['+item_number+'][quantity]" value="1" class="form-control" required /></td> <td><input type="text" name="items['+item_number+'][price]" value="0.00" class="form-control" required /></td> </tr>';
+		}
+		
 	</script>
 
 <div class="container bcontainer">
@@ -29,8 +36,8 @@
 		<div class="panel panel-default">
 		  <div class="panel-body">
 		  
-			<form>
-			
+			<form method="post">
+			{!! Form::token() !!}
 			<div class="col-md-8 ">
 				<fieldset class="form-group">
 					<label for="recipientChooser"  >Choose Recipient:</label>
@@ -47,7 +54,7 @@
 				
 				<fieldset class="form-group">
 					<p>Add items:</p>
-					<table class="table table-bordered table-hover table-responsive">
+					<table class="table table-bordered table-hover table-responsive" id="item_table">
 						<thead>
 						  <tr>
 							<th>#</th>
@@ -60,24 +67,17 @@
 						<tbody>
 						  <tr>
 							<td>1</td>
-							<td><input type="text" name="tite" class="form-control" placeholder="Item Title" required /></td>
-							<td><input type="text" name="item_1_description" class="form-control" placeholder="Item Descripion" required /></td>
-							<td><input type="number" name="item_1_quantity" value="1" class="form-control" required /></td>
-							<td><input type="number" name="item_1_price" value="0.00" class="form-control" required /></td>
-						  </tr>
-						  <tr>
-							<td>2</td>
-							<td><input type="text" name="tite" class="form-control" placeholder="Item Title" required /></td>
-							<td><input type="text" name="item_1_description" class="form-control" placeholder="Item Descripion" required /></td>
-							<td><input type="number" name="item_1_quantity" value="1" class="form-control" required /></td>
-							<td><input type="number" name="item_1_price" value="0.00" class="form-control" required /></td>
+							<td><input type="text" name="items[1][title]" class="form-control" placeholder="Item Title" required /></td>
+							<td><input type="text" name="items[1][description]" class="form-control" placeholder="Item Descripion" required /></td>
+							<td><input type="number" name="items[1][quantity]" value="1" class="form-control" required /></td>
+							<td><input type="text" name="items[1][price]" value="0.00" class="form-control" required /></td>
 						  </tr>
 						  <tr>
 							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><a href="Javascript:;" class="btn btn-primary"><i class="fa fa-plus-circle fa-2" aria-hidden="true"></i> Add New Item</a></td>
+							<td><a href="Javascript: addItemRow();" class="btn btn-primary"><i class="fa fa-plus-circle fa-2" aria-hidden="true"></i> Add New Item</a></td>
 						  </tr>
 						</tbody>
 				  </table>
@@ -96,7 +96,7 @@
 				<fieldset class="form-group ">
 					<label for="currency">Currency:</label>
 					<select name="currency" style="font-family:'FontAwesome', Arial; " class="form-control" required >
-						<option disabled="disabled">Choose Currency</option>
+						<option value="">Choose Currency</option>
 						<option>GBP</option>
 						<option>GBP</option>
 					</select>
